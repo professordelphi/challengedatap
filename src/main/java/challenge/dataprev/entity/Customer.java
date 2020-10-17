@@ -14,18 +14,19 @@ import lombok.Data;
  * Challenge DataPrev
  * Crud Customer 
  * Class Customer*/
-@Data
+
 @Entity
+@Data
 @Table(name = "CUSTOMER")
 public class Customer {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
 	@Column(name = "NAME", length = 50, nullable = false, unique = false)
 	private String name;
 
-	@Column(name = "CPF", length = 50, nullable = false, unique = true)
+	@Column(name = "CPF", length = 50, nullable = false, unique = false)
 	private String cpf;
 
 	@Column(name = "ADDRESS", length = 50, nullable = false, unique = false)

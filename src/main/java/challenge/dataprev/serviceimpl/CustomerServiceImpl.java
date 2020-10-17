@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import challenge.dataprev.dto.CustomerRequestDto;
 import challenge.dataprev.entity.Customer;
@@ -17,6 +18,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired 
 	CustomerRepository customerRepository;
 	
+	Customer customer;
 	
 	@Override
 	public List<Customer> getFindAll() {
@@ -31,9 +33,16 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer save(CustomerRequestDto customerRequestDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Customer save(@RequestBody CustomerRequestDto customerRequestDto) {
+
+		customer = new Customer();
+		customer.setName("Nome Marcos");
+		customer.setAddress("Endereco Rua marangua");
+		customer.setCpf("12345");
+		
+		//inserir o map
+		return this.customerRepository.save(customer);
+	
 	}
 
 	@Override
