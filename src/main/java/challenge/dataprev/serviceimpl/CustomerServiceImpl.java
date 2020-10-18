@@ -1,6 +1,7 @@
 package challenge.dataprev.serviceimpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,17 +24,17 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> getFindAll() {
 		// TODO Auto-generated method stub
-		return null;
+	return this.customerRepository.findAll();
 	}
 
 	@Override
 	public Customer getCustomerById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.customerRepository.findById(id).orElse(null);
 	}
 
 	@Override
-	public Customer save(@RequestBody CustomerRequestDto customerRequestDto) {
+	public Customer save(CustomerRequestDto customerRequestDto) {
 
 		customer = new Customer();
 		customer.setName("Nome Marcos");
@@ -46,15 +47,20 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void update(CustomerRequestDto CustomerRequestDto, Long id) {
+	public Customer update(CustomerRequestDto CustomerRequestDto, Long id) {
 		// TODO Auto-generated method stub
-
+		//completar
+		customer = new Customer();
+		customer.setName("Nome Marcos");
+		customer.setAddress("Endereco Rua marangua");
+		customer.setCpf("12345");
+       return this.customerRepository.save(customer);
 	}
 
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
-
+      this.customerRepository.deleteById(id);
 	}
 
 }

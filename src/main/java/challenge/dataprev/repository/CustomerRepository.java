@@ -13,7 +13,7 @@ import challenge.dataprev.entity.Customer;
  * Crud Customer 
  * Customer Repository*/
 @Repository
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 	
 
 }

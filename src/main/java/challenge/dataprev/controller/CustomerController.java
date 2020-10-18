@@ -43,14 +43,17 @@ public class CustomerController {
 	}
 	
 	//It finds customer by id
-	@GetMapping("/customer/{customerid}")  
-	private Customer getCustomer(@PathVariable("customerid") Long customerid)   
+	@GetMapping("/{customerid}")  
+	private  ResponseEntity<Customer> getCustomerById(@PathVariable("customerid") Long customerid)   
 	{  
-	return this.customerService.getCustomerById(customerid);  
+		
+		Customer customer = this.customerService.getCustomerById(customerid);
+		
+		return   ResponseEntity.ok(customer) ;  
 	}  
 	
 	//It deletes a specified customer  
-	@DeleteMapping("/customer/{customerid}")  
+	@DeleteMapping("/{customerid}")  
 	private void deletecustomer(@PathVariable("customerid") Long customerid)   
 	{  
 		this.customerService.delete(customerid);  

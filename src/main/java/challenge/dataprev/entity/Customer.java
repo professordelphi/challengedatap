@@ -7,7 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 /*
  * Marcos Amaral Dev Java
  * 17-10-2020
@@ -17,6 +19,8 @@ import lombok.Data;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "CUSTOMER")
 public class Customer {
 	@Id
