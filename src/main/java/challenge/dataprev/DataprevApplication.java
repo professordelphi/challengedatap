@@ -1,11 +1,11 @@
 package challenge.dataprev;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan(basePackages = {"challenge.dataprev.entity"})
+@EnableAutoConfiguration
 public class DataprevApplication {
 
 	public static void main(String[] args) {

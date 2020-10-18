@@ -1,11 +1,9 @@
 package challenge.dataprev.serviceimpl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import challenge.dataprev.dto.CustomerRequestDto;
 import challenge.dataprev.entity.Customer;
@@ -16,10 +14,16 @@ import challenge.dataprev.service.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-	@Autowired 
-	CustomerRepository customerRepository;
+	 
+	private	CustomerRepository customerRepository;
 	
-	Customer customer;
+
+	@Autowired
+	public CustomerServiceImpl(CustomerRepository customerRepository)
+	{
+	this.customerRepository = customerRepository;
+	}  
+	
 	
 	@Override
 	public List<Customer> getFindAll() {
@@ -36,25 +40,32 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer save(CustomerRequestDto customerRequestDto) {
 
-		customer = new Customer();
-		customer.setName("Nome Marcos");
-		customer.setAddress("Endereco Rua marangua");
-		customer.setCpf("12345");
 		
-		//inserir o map
-		return this.customerRepository.save(customer);
-	
+		Customer customerToSave = Customer.builder()
+				.name(customerRequestDto.getName()) 
+				.address(customerRequestDto.getAddress())
+				.cpf(customerRequestDto.getCpf())
+				.build();
+				
+		         Customer customerSaved  = this.customerRepository.save(customerToSave);
+			
+		return this.customerRepository.save(customerSaved);
+
 	}
 
 	@Override
-	public Customer update(CustomerRequestDto CustomerRequestDto, Long id) {
+	public Customer update(CustomerRequestDto customerRequestDto, Long id) {
 		// TODO Auto-generated method stub
-		//completar
-		customer = new Customer();
-		customer.setName("Nome Marcos");
-		customer.setAddress("Endereco Rua marangua");
-		customer.setCpf("12345");
-       return this.customerRepository.save(customer);
+		Customer customerToSave = Customer.builder()
+				.id(id)
+				.name(customerRequestDto.getName()) 
+				.address(customerRequestDto.getAddress())
+				.cpf(customerRequestDto.getCpf())
+				.build();
+				
+		         Customer customerSaved  = this.customerRepository.save(customerToSave);
+			     
+		return this.customerRepository.save(customerSaved);
 	}
 
 	@Override

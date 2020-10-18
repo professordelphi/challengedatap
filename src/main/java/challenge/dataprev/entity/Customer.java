@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 /*
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "CUSTOMER")
@@ -30,7 +32,7 @@ public class Customer {
 	@Column(name = "NAME", length = 50, nullable = false, unique = false)
 	private String name;
 
-	@Column(name = "CPF", length = 50, nullable = false, unique = false)
+	@Column(name = "CPF", length = 50, nullable = false, unique = true)
 	private String cpf;
 
 	@Column(name = "ADDRESS", length = 50, nullable = false, unique = false)

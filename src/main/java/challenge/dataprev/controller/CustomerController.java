@@ -23,14 +23,16 @@ import challenge.dataprev.service.CustomerService;
 @RequestMapping("/api/v1")
 public class CustomerController {
 
-	@Autowired
 	private CustomerService customerService;
+
+	@Autowired
+	public CustomerController(CustomerService customerService) {
+		this.customerService = customerService;
+	}
 
 	@GetMapping
 	private ResponseEntity<List<Customer>> getAllCustomer() {
 		List<Customer> lista = customerService.getFindAll();
-
-		System.out.println("proximo passo eh save" + lista);
 
 		return ResponseEntity.ok(lista);
 	}
@@ -43,36 +45,33 @@ public class CustomerController {
 
 		return ResponseEntity.ok(customer);
 	}
-	
-	//It finds customer by id
-	@GetMapping("/{customerid}")  
-	private  ResponseEntity<Customer> getCustomerById(@PathVariable("customerid") Long customerid)   
-	{  
-		
-		Optional<Customer> customer  = Optional.ofNullable(this.customerService.getCustomerById(customerid));
-		
-		if (!customer.isEmpty())
-		{
-			return   ResponseEntity.ok(customer.get()) ;
-			
+
+	// It finds customer by id
+	@GetMapping("/{customerid}")
+	private ResponseEntity<Customer> getCustomerById(@PathVariable("customerid") Long customerid) {
+
+		Optional<Customer> customer = Optional.ofNullable(this.customerService.getCustomerById(customerid));
+
+		if (!customer.isEmpty()) {
+			return ResponseEntity.ok(customer.get());
+
 		}
-		
+
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		  
-	}  
-	
-	//It deletes a specified customer  
-	@DeleteMapping("/{customerid}")  
-	private void deletecustomer(@PathVariable("customerid") Long customerid)   
-	{  
-		this.customerService.delete(customerid);  
-	}  
-	 
-	//It updates the customer detail   
-	@PutMapping("/customer")  
-	private ResponseEntity<Customer> update(@RequestBody CustomerRequestDto customerRequestDto)   
-	{  
-	    Customer customer =  this.customerService.save(customerRequestDto);  
-	    return ResponseEntity.ok(customer);
-	}  
+
+	}
+
+	// It deletes a specified customer
+	@DeleteMapping("/{customerid}")
+	private void deletecustomer(@PathVariable("customerid") Long customerid) {
+		this.customerService.delete(customerid);
+	}
+
+	// It updates the customer detail
+	@PutMapping("/{customerid}")
+	private ResponseEntity<Customer> update(@RequestBody CustomerRequestDto customerRequestDto,
+			@PathVariable("customerid") Long customerid) {
+		Customer customer = this.customerService.update(customerRequestDto, customerid);
+		return ResponseEntity.ok(customer);
+	}
 }

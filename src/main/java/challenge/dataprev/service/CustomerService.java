@@ -17,7 +17,7 @@ public interface CustomerService {
 	//save customer
 	public  Customer save(CustomerRequestDto customerRequestDto);
 	//update customer
-	public Customer update(CustomerRequestDto CustomerRequestDto, Long id);
+	public Customer update(CustomerRequestDto customerRequestDto, Long id);
 	//delete customer
 	public void delete(Long id);   
 	
