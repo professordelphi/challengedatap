@@ -32,6 +32,13 @@ public class CustomerController {
 	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;
 	}
+	
+	@GetMapping("/test")
+	private String getTest() {
+		
+		return "Test access";
+	}
+	
 
 	@ApiOperation(value = "Return people list")
 	@ApiResponses(value = {
