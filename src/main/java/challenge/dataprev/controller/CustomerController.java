@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import challenge.dataprev.dto.CustomerRequestDto;
 import challenge.dataprev.entity.Customer;
 import challenge.dataprev.service.CustomerService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -30,11 +33,17 @@ public class CustomerController {
 		this.customerService = customerService;
 	}
 
+	@ApiOperation(value = "Return people list")
+	@ApiResponses(value = {
+	    @ApiResponse(code = 200, message = "Return people list"),
+	    @ApiResponse(code = 403, message = "You don´t have permission to access"),
+	    @ApiResponse(code = 500, message = "Service out"),
+	})
 	@GetMapping
 	private ResponseEntity<List<Customer>> getAllCustomer() {
-		List<Customer> lista = customerService.getFindAll();
+		List<Customer> listOf = customerService.getFindAll();
 
-		return ResponseEntity.ok(lista);
+		return ResponseEntity.ok(listOf);
 	}
 
 	// It posts the Customer detail in the database
@@ -50,7 +59,7 @@ public class CustomerController {
 	@GetMapping("/{customerid}")
 	private ResponseEntity<Customer> getCustomerById(@PathVariable("customerid") Long customerid) {
 
-		Optional<Customer> customer = Optional.ofNullable(this.customerService.getCustomerById(customerid));
+		Optional<Customer> customer = this.customerService.getCustomerById(customerid);
 
 		if (!customer.isEmpty()) {
 			return ResponseEntity.ok(customer.get());

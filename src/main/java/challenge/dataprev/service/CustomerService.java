@@ -1,6 +1,7 @@
 package challenge.dataprev.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public interface CustomerService {
 	//all customer		
 	public List<Customer> getFindAll();
 	//customer
-	public Customer getCustomerById(Long id);   
+	public Optional<Customer> getCustomerById(Long id);   
 	//save customer
 	public  Customer save(CustomerRequestDto customerRequestDto);
 	//update customer

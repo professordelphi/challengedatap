@@ -1,6 +1,7 @@
 package challenge.dataprev.serviceimpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,15 +15,9 @@ import challenge.dataprev.service.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-	 
+	@Autowired
 	private	CustomerRepository customerRepository;
 	
-
-	@Autowired
-	public CustomerServiceImpl(CustomerRepository customerRepository)
-	{
-	this.customerRepository = customerRepository;
-	}  
 	
 	
 	@Override
@@ -32,9 +27,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer getCustomerById(Long id) {
+	public Optional<Customer> getCustomerById(Long id) {
 		// TODO Auto-generated method stub
-		return this.customerRepository.findById(id).orElse(null);
+		return this.customerRepository.findById(id);
 	}
 
 	@Override
