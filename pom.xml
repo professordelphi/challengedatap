@@ -15,19 +15,22 @@
 	<description>Crud Customer - [name, cpf, address]</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<swagger.version>1.5.21</swagger.version>
+		<springfox.swagger.version>2.8.0</springfox.swagger.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
+	
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
-		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -47,15 +50,63 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			
 			<exclusions>
 				<exclusion>
 					<groupId>org.junit.vintage</groupId>
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+			</dependency>
+		
+	
+		
+	<dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jaxrs</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-servlet</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+		
+		 <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jersey-jaxrs</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        
+        
+        <dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox.swagger.version}</version>
 		</dependency>
+
+
+
+<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox.swagger.version}</version>
+		</dependency>		
+		 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		
 	</dependencies>
+
 
 	<build>
 		<plugins>
