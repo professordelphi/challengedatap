@@ -26,7 +26,7 @@ Update (put)
 
 Delete (delete)
 
-http://localhost:8080/api/v1/<id>
+http://localhost:8080/api/v1/1
   
      Example:
      http://localhost:8080/api/v1/1
