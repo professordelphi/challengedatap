@@ -7,7 +7,7 @@ FindAll (get)
  http://localhost:8080/api/v1
 
 Find by Id (get)
-  http://localhost:8080/api/v1/<id>
+  http://localhost:8080/api/v1/1
   
      Example:
      http://localhost:8080/api/v1/1
