@@ -26,9 +26,10 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/api/v1")
 public class CustomerController {
 
+	@Autowired
 	private CustomerService customerService;
 
-	@Autowired
+	
 	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;
 	}
@@ -68,7 +69,7 @@ public class CustomerController {
 
 		Optional<Customer> customer = this.customerService.getCustomerById(customerid);
 
-		if (!customer.isEmpty()) {
+		if (customer.isPresent()) {
 			return ResponseEntity.ok(customer.get());
 
 		}

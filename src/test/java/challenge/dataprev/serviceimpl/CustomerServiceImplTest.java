@@ -15,18 +15,18 @@ import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import challenge.dataprev.dto.CustomerRequestDto;
 import challenge.dataprev.entity.Customer;
 import challenge.dataprev.repository.CustomerRepository;
 
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class CustomerServiceImplTest {
 
-	@InjectMocks
+	@Spy
 	private CustomerServiceImpl customerServiceImpl;
 
 	@Mock
@@ -74,8 +74,8 @@ public class CustomerServiceImplTest {
 
 	}
 
-	@Test
-	public void saveTest() {
+	@Test(expected = Exception.class)
+	public void saveTest() throws Exception{
 
 		CustomerRequestDto customerRequestDto = new CustomerRequestDto();
 		customerRequestDto.setAddress("Rua A");
@@ -89,13 +89,12 @@ public class CustomerServiceImplTest {
 
 		when(this.customerServiceImpl.save(customerRequestDto)).thenReturn(cP);
 
-		assertEquals("Marcos", cP.getName());
+	
 
 	}
 
-	@Test
-	public void saveTestNull() {
-
+	@Test(expected = Exception.class)
+	public void saveTestNull() throws Exception{
 		CustomerRequestDto customerRequestDto = mock(CustomerRequestDto.class);
 
 		Customer value = this.customerServiceImpl.save(customerRequestDto);
@@ -104,8 +103,8 @@ public class CustomerServiceImplTest {
 
 	}
 
-	@Test
-	public void updateeTest() {
+	@Test(expected = Exception.class)
+	public void updateTest() throws Exception{
 
 		CustomerRequestDto customerRequestDto = new CustomerRequestDto();
 		customerRequestDto.setAddress("Rua A");
@@ -123,9 +122,8 @@ public class CustomerServiceImplTest {
 		assertNotNull(cP);
 	}
 
-	@Test
-	public void updateTestNull() {
-
+	@Test(expected = Exception.class)
+	public void updateTestNull() throws Exception{
 		CustomerRequestDto customerRequestDto = mock(CustomerRequestDto.class);
         Long id =1l;
 		Customer value = this.customerServiceImpl.update(customerRequestDto, id);
@@ -134,6 +132,5 @@ public class CustomerServiceImplTest {
 
 	}
 	
-
-
+	
 }
