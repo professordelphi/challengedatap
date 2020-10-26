@@ -33,5 +33,9 @@ http://localhost:8080/api/v1/1
      
      
   Podendo ser testado também no HEROKU.COM
-    https://challengdata.herokuapp.com/api/v1
+  You may test this api in Heroku.com
+  https://challengdata.herokuapp.com/api/v1
+    
+  If you want, you can test with Swagger-ui.html
+  https://challengdata.herokuapp.com/swagger-ui.html
   
