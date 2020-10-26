@@ -60,7 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
 				
 		         Customer customerSaved  = this.customerRepository.save(customerToSave);
 			     
-		return this.customerRepository.save(customerSaved);
+		return customerSaved;
 	}
 
 	@Override
