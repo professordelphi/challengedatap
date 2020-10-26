@@ -38,7 +38,7 @@ public class CustomerServiceImplTest {
 	@Test(expected = Exception.class)
 	public void findAllTest() throws IOException {
 
-		List<Customer> value = new ArrayList<Customer>();
+		//Popular dados
 
 		Customer custumer = new Customer();
 
@@ -46,14 +46,24 @@ public class CustomerServiceImplTest {
 		custumer.setCpf("12345678911");
 		custumer.setName("Marcos");
 		custumer.setId(1l);
+		List<Customer> value = new ArrayList<Customer>();
+	//	value.add(custumer);
 
-		value.add(custumer);
-
+		CustomerRequestDto customerRequestDto = new CustomerRequestDto();
+		
+		customerRequestDto.setName(custumer.getName());
+		customerRequestDto.setCpf(custumer.getCpf());
+		customerRequestDto.setAddress(custumer.getAddress());
+		customerRequestDto.setId(custumer.getId());
+		
+		this.customerServiceImpl.save(customerRequestDto);
+		
 		value = this.customerServiceImpl.getFindAll();
+		//exec
 		when(this.customerRepository.findAll()).thenReturn(value);
-
+       //verification
 		assertEquals("Marcos", value.get(0).getName());
-
+		
 	}
 
 	@Test(expected = Exception.class)
@@ -66,10 +76,11 @@ public class CustomerServiceImplTest {
 		custumer.setName("Marcos");
 		custumer.setId(1l);
 
+		//exec
 		Optional<Customer> value = this.customerServiceImpl.getCustomerById(custumer.getId());
-		// value = this.customerRepository.findById(custumer.getId());
-		when(this.customerRepository.findById(value.get().getId())).thenReturn(value);
 
+		when(this.customerRepository.findById(value.get().getId())).thenReturn(value);
+       //verification
 		assertEquals("Marcos", value.get().getName());
 
 	}
