@@ -77,12 +77,15 @@ public class CustomerServiceImplTest {
 		custumer.setName("Marcos");
 		custumer.setId(1l);
 
+		
+			
 		// exec
-		Optional<Customer> value = this.customerServiceImpl.getCustomerById(custumer.getId());
+		Optional<Customer> value = this.customerRepository.findById(custumer.getId());
 
-		when(this.customerRepository.findById(value.get().getId())).thenReturn(value);
+		when(this.customerServiceImpl.getCustomerById(value.get().getId())).thenReturn(value);
 		// verification
 		assertEquals("Marcos", value.get().getName());
+		assertEquals(1L, value.get().getId().longValue());
 
 	}
 
