@@ -90,9 +90,8 @@ public class CustomerServiceImplTest {
 	}
 
 	@Test(expected = Exception.class)
-	public void saveTest() throws Exception{
-
-
+	public void saveTest() throws Exception {
+		// Fill data
 		CustomerRequestDto customerRequestDto = new CustomerRequestDto();
 		customerRequestDto.setAddress("Rua A");
 		customerRequestDto.setCpf("12345678911");
@@ -124,7 +123,6 @@ public class CustomerServiceImplTest {
 	@Test(expected = Exception.class)
 	public void updateTest() throws Exception {
 		//	Fill data
-
 		CustomerRequestDto customerRequestDto = new CustomerRequestDto();
 		customerRequestDto.setAddress("Rua A");
 		customerRequestDto.setCpf("12345678911");
@@ -155,7 +153,5 @@ public class CustomerServiceImplTest {
 		assertNull(value);
 
 	}
-
-	
 
 }
