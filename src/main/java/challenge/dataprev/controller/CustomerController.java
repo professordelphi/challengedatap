@@ -26,9 +26,11 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/api/v1")
 public class CustomerController {
 
-	@Autowired
+	@Autowired(required=false)
 	private CustomerService customerService;
 
+	public CustomerController()
+	{}
 	
 	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;

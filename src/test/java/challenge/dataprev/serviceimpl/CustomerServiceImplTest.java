@@ -15,30 +15,29 @@ import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import challenge.dataprev.dto.CustomerRequestDto;
 import challenge.dataprev.entity.Customer;
 import challenge.dataprev.repository.CustomerRepository;
 
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class CustomerServiceImplTest {
 
-	@InjectMocks
+	@Spy
 	private CustomerServiceImpl customerServiceImpl;
 
 	@Mock
 	private CustomerRepository customerRepository;
 
-	@Mock
-	File file;
+	
 
 	@Test(expected = Exception.class)
 	public void findAllTest() throws IOException {
 
-		List<Customer> value = new ArrayList<Customer>();
+		// Fill data
 
 		Customer custumer = new Customer();
 
@@ -46,19 +45,31 @@ public class CustomerServiceImplTest {
 		custumer.setCpf("12345678911");
 		custumer.setName("Marcos");
 		custumer.setId(1l);
+		List<Customer> value = new ArrayList<Customer>();
 
-		value.add(custumer);
+
+		CustomerRequestDto customerRequestDto = new CustomerRequestDto();
+
+		customerRequestDto.setName(custumer.getName());
+		customerRequestDto.setCpf(custumer.getCpf());
+		customerRequestDto.setAddress(custumer.getAddress());
+		customerRequestDto.setId(custumer.getId());
+
+		this.customerServiceImpl.save(customerRequestDto);
 
 		value = this.customerServiceImpl.getFindAll();
+		
+		// exec
 		when(this.customerRepository.findAll()).thenReturn(value);
-
+		
+		// verification
 		assertEquals("Marcos", value.get(0).getName());
 
 	}
 
 	@Test(expected = Exception.class)
 	public void getCustomerById() {
-		// TODO Auto-generated method stub
+		// Fill data
 		Customer custumer = new Customer();
 
 		custumer.setAddress("Rua A");
@@ -66,17 +77,21 @@ public class CustomerServiceImplTest {
 		custumer.setName("Marcos");
 		custumer.setId(1l);
 
-		Optional<Customer> value = this.customerServiceImpl.getCustomerById(custumer.getId());
-		// value = this.customerRepository.findById(custumer.getId());
-		when(this.customerRepository.findById(value.get().getId())).thenReturn(value);
+		
+			
+		// exec
+		Optional<Customer> value = this.customerRepository.findById(custumer.getId());
 
+		when(this.customerServiceImpl.getCustomerById(value.get().getId())).thenReturn(value);
+		// verification
 		assertEquals("Marcos", value.get().getName());
+		assertEquals(1L, value.get().getId().longValue());
 
 	}
 
-	@Test
-	public void saveTest() {
-
+	@Test(expected = Exception.class)
+	public void saveTest() throws Exception {
+		// Fill data
 		CustomerRequestDto customerRequestDto = new CustomerRequestDto();
 		customerRequestDto.setAddress("Rua A");
 		customerRequestDto.setCpf("12345678911");
@@ -86,27 +101,28 @@ public class CustomerServiceImplTest {
 		cP.setAddress("Rua A");
 		cP.setCpf("12345678911");
 		cP.setName("Marcos");
-
+		//exec
 		when(this.customerServiceImpl.save(customerRequestDto)).thenReturn(cP);
-
-		assertEquals("Marcos", cP.getName());
+		//verification
+		assertNotNull(cP);
+		assertEquals("Rua A", cP.getAddress());
 
 	}
 
-	@Test
-	public void saveTestNull() {
-
-		CustomerRequestDto customerRequestDto = mock(CustomerRequestDto.class);
-
+	@Test(expected = Exception.class)
+	public void saveTestNull() throws Exception {
+		// Dto instace
+		CustomerRequestDto customerRequestDto = new CustomerRequestDto();
+		//	exec
 		Customer value = this.customerServiceImpl.save(customerRequestDto);
-
+		//	verification
 		assertNull(value);
 
 	}
 
-	@Test
-	public void updateeTest() {
-
+	@Test(expected = Exception.class)
+	public void updateTest() throws Exception {
+		//	Fill data
 		CustomerRequestDto customerRequestDto = new CustomerRequestDto();
 		customerRequestDto.setAddress("Rua A");
 		customerRequestDto.setCpf("12345678911");
@@ -117,23 +133,25 @@ public class CustomerServiceImplTest {
 		cP.setAddress("Rua A");
 		cP.setCpf("12345678911");
 		cP.setName("Marcos");
-		when(this.customerServiceImpl.update(customerRequestDto,1l)).thenReturn(cP);
-
+		
+		//exec 
+		when(this.customerServiceImpl.update(customerRequestDto, 1l)).thenReturn(cP);
+		//verification
 		assertEquals("Marcos", cP.getName());
 		assertNotNull(cP);
 	}
 
-	@Test
-	public void updateTestNull() {
-
-		CustomerRequestDto customerRequestDto = mock(CustomerRequestDto.class);
-        Long id =1l;
+	@Test(expected = Exception.class)
+	public void updateTestNull() throws Exception {
+		//Dto instace
+		CustomerRequestDto customerRequestDto = new CustomerRequestDto();
+		Long id = 1l;
+		//exec
 		Customer value = this.customerServiceImpl.update(customerRequestDto, id);
+		//verification
 		assertNotEquals("Rua A", customerRequestDto.getAddress());
 		assertNull(value);
 
 	}
-	
-
 
 }
