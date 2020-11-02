@@ -26,7 +26,6 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/api/v1")
 public class CustomerController {
 
-
 	@Autowired(required=false)
 	private CustomerService customerService;
 
